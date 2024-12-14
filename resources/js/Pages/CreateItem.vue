@@ -5,6 +5,8 @@ import InputLabel from '@/Components/InputLabel.vue';
 import InputError from '@/Components/InputError.vue';
 import TextInput from '@/Components/TextInput.vue';
 import Editor from '@/Components/Editor.vue';
+import SelectBox from '@/Components/SelectBox.vue';
+import Checkbox from '@/Components/Checkbox.vue';
 
 const form = useForm({
     item_name: '',
@@ -19,6 +21,25 @@ const form = useForm({
     phone_number: '',
     address: '',
 });
+
+const categories = [
+    { value: 'clothes', label: 'Clothes' },
+    { value: 'computers', label: 'Computers' },
+    { value: 'mobiles', label: 'Mobiles' },
+    { value: 'books', label: 'Books' },
+];
+
+const item_conditions = [
+    { value: 'new', label: 'New' },
+    { value: 'used', label: 'Used' },
+    { value: 'good_second', label: 'Good Second Hand' },
+];
+
+const item_types = [
+    { value: 'for_sell', label: 'For Sell' },
+    { value: 'for_buy', label: 'For Buy' },
+    { value: 'for_exchange', label: 'For Exchange' },
+];
 </script>
 
 <template>
@@ -33,39 +54,77 @@ const form = useForm({
                         <!-- Item Name-->
                         <div class="mb-5">
                             <InputLabel for="item_name" value="Item Name" :isRequired="true" />
-                            <TextInput id="item_name" v-model="form.item_name" type="text" class="mt-2 block w-full" />
+                            <TextInput id="item_name" v-model="form.item_name" type="text" class="mt-2 block w-full"
+                                placeholder="Input Name" />
                             <InputError class="mt-2" :message="form.errors.item_name" />
                         </div>
 
                         <!-- Category-->
                         <div class="mb-5">
                             <InputLabel for="category" value="Select Category" :isRequired="true" />
-                            <select id="category" v-model="form.category" class="mt-2 block w-full rounded-md">
-                                <option value=""></option>
-                                <option value="clothes">Clothes</option>
-                                <option value="computers">Computers</option>
-                                <option value="mobiles">Mobiles</option>
-                                <option value="books">Books</option>
-                            </select>
+                            <SelectBox id="category" :options="categories" v-model="form.category"
+                                class="mt-2 block w-full" />
                             <InputError class="mt-2" :message="form.errors.item_name" />
                         </div>
 
                         <!-- Price-->
                         <div class="mb-5">
                             <InputLabel for="price" value="Price" :isRequired="true" />
-                            <TextInput id="price" v-model="form.price" type="text" class="mt-2 block w-full" />
+                            <TextInput id="price" v-model="form.price" type="text" class="mt-2 block w-full"
+                                placeholder="Enter Price" />
                             <InputError class="mt-2" :message="form.errors.price" />
                         </div>
 
                         <!-- Description -->
                         <div class="mb-5">
-                            <InputLabel value="Description" :isRequired="true" customClass="mb-2"/>
+                            <InputLabel value="Description" :isRequired="true" customClass="mb-2" />
                             <Editor id="description" v-model="form.description" />
                             <InputError class="mt-2" :message="form.errors.description" />
+                        </div>
+
+                        <!-- Item Condition -->
+                        <div class="mb-5">
+                            <InputLabel for="item_condition" value="Item Condition" :isRequired="true" />
+                            <SelectBox id="item_condition" :options="item_conditions" v-model="form.item_condition"
+                                class="mt-2 block w-full" />
+                            <InputError class="mt-2" :message="form.errors.item_condition" />
+                        </div>
+
+                        <!-- Item Type -->
+                        <div class="mb-5">
+                            <InputLabel for="item_type" value="Item Type" :isRequired="true" />
+                            <SelectBox id="item_type" :options="item_types" v-model="form.item_type"
+                                class="mt-2 block w-full" />
+                            <InputError class="mt-2" :message="form.errors.item_condition" />
+                        </div>
+
+                        <!-- Publish Status -->
+                        <div class="mb-5">
+                            <InputLabel for="status" value="Status" />
+                            <Checkbox id="status" v-model="form.status" :true-value="1"
+                                class="mt-2 inline-block w-5 h-5" /><span
+                                class="text-gray-600 text-xs ml-3">Publish</span>
+                            <InputError class="mt-2" :message="form.errors.status" />
+                        </div>
+
+                        <!-- Item Photo -->
+                        <div class="mb-5">
+                            <InputLabel for="item_photo" value="Item Photo" :isRequired="true" />
+                            <TextInput id="item_photo" v-model="form.item_photo" type="file"
+                                class="mt-2 block w-full" />
+                            <InputError class="mt-2" :message="form.errors.item_photo" />
                         </div>
                     </div>
                     <div class="w-1/2 flex flex-col px-2">
                         <p class="font-bold mb-4">Owner Information</p>
+
+                        <!-- Owner Name -->
+                        <div class="mb-5">
+                            <InputLabel for="owner_name" value="Owner Name" :isRequired="true" />
+                            <TextInput id="owner_name" v-model="form.owner_name" type="text" class="mt-2 block w-full"
+                                placeholder="Input Owner Name" />
+                            <InputError class="mt-2" :message="form.errors.owner_name" />
+                        </div>
 
                     </div>
                 </div>
