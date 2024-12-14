@@ -4,6 +4,7 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import InputError from '@/Components/InputError.vue';
 import TextInput from '@/Components/TextInput.vue';
+import Editor from '@/Components/Editor.vue';
 
 const form = useForm({
     item_name: '',
@@ -31,15 +32,15 @@ const form = useForm({
 
                         <!-- Item Name-->
                         <div class="mb-5">
-                            <InputLabel for="item_name" value="Item Name" :isRequired="true"/>
-                            <TextInput id="item_name" v-model="form.item_name" type="text" class="mt-2 block w-full"/>
+                            <InputLabel for="item_name" value="Item Name" :isRequired="true" />
+                            <TextInput id="item_name" v-model="form.item_name" type="text" class="mt-2 block w-full" />
                             <InputError class="mt-2" :message="form.errors.item_name" />
                         </div>
 
                         <!-- Category-->
                         <div class="mb-5">
-                            <InputLabel for="category" value="Select Category" :isRequired="true"/>
-                            <select v-model="form.category" class="mt-2 block w-full rounded-md">
+                            <InputLabel for="category" value="Select Category" :isRequired="true" />
+                            <select id="category" v-model="form.category" class="mt-2 block w-full rounded-md">
                                 <option value=""></option>
                                 <option value="clothes">Clothes</option>
                                 <option value="computers">Computers</option>
@@ -51,16 +52,21 @@ const form = useForm({
 
                         <!-- Price-->
                         <div class="mb-5">
-                            <InputLabel for="price" value="Price" :isRequired="true"/>
-                            <TextInput id="price" v-model="form.price" type="text" class="mt-2 block w-full"/>
+                            <InputLabel for="price" value="Price" :isRequired="true" />
+                            <TextInput id="price" v-model="form.price" type="text" class="mt-2 block w-full" />
                             <InputError class="mt-2" :message="form.errors.price" />
                         </div>
 
-                        
+                        <!-- Description -->
+                        <div class="mb-5">
+                            <InputLabel value="Description" :isRequired="true" customClass="mb-2"/>
+                            <Editor id="description" v-model="form.description" />
+                            <InputError class="mt-2" :message="form.errors.description" />
+                        </div>
                     </div>
                     <div class="w-1/2 flex flex-col px-2">
                         <p class="font-bold mb-4">Owner Information</p>
-                        
+
                     </div>
                 </div>
             </form>
