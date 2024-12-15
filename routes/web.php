@@ -30,10 +30,8 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [ItemController::class, 'index'])->name('dashboard');
+    Route::get('/items/create', [ItemController::class, 'create'])->name('items.create');
+    Route::post('/items/create', [ItemController::class, 'store']);
+    Route::put('/items/{item}/update-status', [ItemController::class, 'updateStatus'])->name('items.status-update');
 });
-
-Route::get('/items/create',[ItemController::class,'create'])->name('items.create');
-Route::post('/items/create',[ItemController::class,'store']);

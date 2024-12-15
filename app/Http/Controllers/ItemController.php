@@ -10,6 +10,14 @@ use Inertia\Inertia;
 
 class ItemController extends Controller
 {
+    public function index()
+    {
+        $items = Item::paginate(10);
+        return Inertia::render('Dashboard', [
+            "items" => $items
+        ]);
+    }
+
     public function create()
     {
         return Inertia::render('CreateItem');
@@ -30,6 +38,15 @@ class ItemController extends Controller
             Log::error($e->getMessage());
             return redirect()->route('dashboard')->dangerBanner('Action Failed!.');
         }
+    }
 
+    public function updateStatus(Request $request, Item $item)
+    {
+        $data = $request->validate([
+            'status' => 'nullable|integer',
+        ]);
+
+        $item->status = $data['status'];
+        $item->save();
     }
 }
