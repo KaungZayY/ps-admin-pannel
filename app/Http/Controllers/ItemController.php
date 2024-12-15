@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreItemRequest;
+use App\Http\Requests\UpdateItemRequest;
 use App\Models\Item;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -49,7 +50,26 @@ class ItemController extends Controller
         $item->status = $data['status'];
         $item->save();
 
-        return redirect()->back()->banner('Item Published!');
+        return redirect()->back()->banner('Success!');
+    }
+
+    public function edit(Item $item)
+    {
+        return Inertia::render('EditItem', [
+            'item' => $item
+        ]);
+    }
+
+    public function update(UpdateItemRequest $request, Item $item)
+    {
+        $data = $request->validated();
+        try {
+            $item->update($data);
+            return redirect()->route('dashboard')->banner('Item Updated successfully.');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->back()->dangerBanner('Action Failed!.');
+        }
     }
 
     public function destroy(Item $item)

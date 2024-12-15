@@ -33,6 +33,8 @@ Route::middleware([
     Route::get('/dashboard', [ItemController::class, 'index'])->name('dashboard');
     Route::get('/items/create', [ItemController::class, 'create'])->name('items.create');
     Route::post('/items/create', [ItemController::class, 'store']);
+    Route::get('/items/{item}/update', [ItemController::class, 'edit'])->name('items.update');
+    Route::put('/items/{item}/update', [ItemController::class, 'update']);
     Route::delete('/items/{item}/delete', [ItemController::class, 'destroy'])->name('items.delete');
     Route::put('/items/{item}/update-status', [ItemController::class, 'updateStatus'])->name('items.status-update');
 });

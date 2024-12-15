@@ -15,6 +15,10 @@ const updateStatus = (id, newValue) => {
     });
 };
 
+const handleUpdate = (id) => {
+    router.get(route('items.update', id));
+}
+
 const handleDelete = (id) => {
     router.delete(route('items.delete', id));
 }
@@ -57,7 +61,7 @@ const handleDelete = (id) => {
                         <tbody>
                             <tr v-for="(item, index) in items.data" class="border-b">
                                 <td class="py-2 px-4 inline-flex gap-2 mt-1">
-                                    <button class="" title="Edit">
+                                    <button @click="handleUpdate(item.id)" class="" title="Edit">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
                                             class="w-5 h-5 fill-green-600 ml-1">
                                             <path
