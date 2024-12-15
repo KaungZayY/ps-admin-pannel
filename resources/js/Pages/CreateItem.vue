@@ -19,7 +19,7 @@ const form = useForm({
     description: '',
     item_condition: '',
     item_type: '',
-    status: '',
+    status: 0,
     item_photo: '',
     owner_name: '',
     country_code: '',
@@ -117,9 +117,8 @@ const submit = () => {
                         <!-- Publish Status -->
                         <div class="mb-5">
                             <InputLabel for="status" value="Status" />
-                            <Checkbox id="status" v-model="form.status" :true-value=1
-                                class="mt-2 inline-block w-5 h-5" /><span
-                                class="text-gray-600 text-xs ml-3">Publish</span>
+                            <Checkbox id="status" v-model="form.status" class="mt-2 inline-block w-5 h-5" />
+                            <span class="text-gray-600 text-xs ml-3">Publish</span>
                             <InputError class="mt-2" :message="form.errors.status" />
                         </div>
 

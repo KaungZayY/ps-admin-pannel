@@ -1,33 +1,28 @@
 <script setup>
-import { computed } from 'vue';
+import { ref } from 'vue';
 
-const emit = defineEmits(['update:checked']);
-
-const props = defineProps({
-    modelValue: {
-        type: Number,
-        default: 0,
-    },
+defineProps({
+    modelValue: [String, Number],
 });
 
-const proxyChecked = computed({
-    get() {
-        return props.checked;
-    },
+const emit = defineEmits(['update:modelValue']);
 
-    set(val) {
-        emit('update:checked', val);
-    },
-});
+const checkbox = ref(null);
+
+defineExpose({ focus: () => checkbox.value.focus() });
+
+const updateValue = (checked) => {
+    const value = checked ? 1 : 0;
+    emit('update:modelValue', value);
+};
 </script>
-
 
 <template>
     <input
-        v-model="proxyChecked"
+        ref="checkbox"
         type="checkbox"
-        :value="modelValue"
-        :checked="modelValue === 1"
-        class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500"
+        class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+        :checked="modelValue == 1"
+        @change="updateValue($event.target.checked)"
     >
 </template>
