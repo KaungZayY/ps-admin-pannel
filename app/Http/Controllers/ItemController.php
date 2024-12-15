@@ -48,5 +48,19 @@ class ItemController extends Controller
 
         $item->status = $data['status'];
         $item->save();
+
+        return redirect()->back()->banner('Item Published!');
+    }
+
+    public function destroy(Item $item)
+    {
+        try {
+            $item->delete();
+            return redirect()->back()->banner('Item deleted!');
+
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->back()->dangerBanner('Action Failed!.');
+        }
     }
 }
