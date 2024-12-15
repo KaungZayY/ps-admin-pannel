@@ -19,6 +19,7 @@ class Item extends Model
         'status',
         'item_photo',
         'owner_name',
+        'country_code',
         'phone_number',
         'address',
     ];

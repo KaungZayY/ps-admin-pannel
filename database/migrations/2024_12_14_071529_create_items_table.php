@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('status')->nullable();
             $table->string('item_photo')->nullable();
             $table->string('owner_name');
+            $table->string('country_code');
             $table->string('phone_number');
             $table->string('address');
             $table->timestamps();

@@ -7,6 +7,7 @@ import TextInput from '@/Components/TextInput.vue';
 import Editor from '@/Components/Editor.vue';
 import SelectBox from '@/Components/SelectBox.vue';
 import Checkbox from '@/Components/Checkbox.vue';
+import countryCodesJson from '../../json/country_codes.json';
 
 const form = useForm({
     item_name: '',
@@ -18,6 +19,7 @@ const form = useForm({
     status: '',
     item_photo: '',
     owner_name: '',
+    country_code:'',
     phone_number: '',
     address: '',
 });
@@ -40,6 +42,13 @@ const item_types = [
     { value: 'for_buy', label: 'For Buy' },
     { value: 'for_exchange', label: 'For Exchange' },
 ];
+
+// console.log('Country Codes JSON:', countryCodesJson);
+
+const countries = countryCodesJson.map((country) => ({
+  value: country.dial_code,
+  label: country.code,
+}));
 </script>
 
 <template>
@@ -126,6 +135,15 @@ const item_types = [
                             <InputError class="mt-2" :message="form.errors.owner_name" />
                         </div>
 
+                        <div class="mb-5">
+                            <InputLabel value="Phone Number" :isRequired="true" />
+                            <div class="flex flex-row mt-2">
+                                <SelectBox :options="countries" v-model="form.country_code" class="w-24" />
+                                <TextInput id="phone_number" type="text" v-model="form.phone_number" class="w-full"/>
+                            </div>
+                            <InputError class="mt-2" :message="form.errors.country_code" />
+                            <InputError class="mt-2" :message="form.errors.phone_number" />
+                        </div>
                     </div>
                 </div>
             </form>
