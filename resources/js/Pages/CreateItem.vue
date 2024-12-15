@@ -8,6 +8,8 @@ import Editor from '@/Components/Editor.vue';
 import SelectBox from '@/Components/SelectBox.vue';
 import Checkbox from '@/Components/Checkbox.vue';
 import LocationPicker from '@/Components/LocationPicker.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import { Link } from '@inertiajs/vue3';
 import countryCodesJson from '../../json/country_codes.json';
 
 const form = useForm({
@@ -136,20 +138,35 @@ const countries = countryCodesJson.map((country) => ({
                             <InputError class="mt-2" :message="form.errors.owner_name" />
                         </div>
 
+                        <!-- Phone Number -->
                         <div class="mb-5">
                             <InputLabel value="Phone Number" :isRequired="true" />
                             <div class="flex flex-row mt-2 justify-between">
                                 <SelectBox :options="countries" v-model="form.country_code" class="w-1/6" />
-                                <TextInput id="phone_number" type="text" v-model="form.phone_number" class="w-5/6"/>
+                                <TextInput id="phone_number" type="text" v-model="form.phone_number" class="w-5/6" />
                             </div>
                             <InputError class="mt-2" :message="form.errors.country_code" />
                             <InputError class="mt-2" :message="form.errors.phone_number" />
                         </div>
 
+                        <!-- Address-->
                         <div class="mb-5">
                             <InputLabel value="Address" :isRequired="true" />
-                            <LocationPicker v-model="form.address"/>
+                            <LocationPicker v-model="form.address" />
                             <InputError class="mt-2" :message="form.errors.address" />
+                        </div>
+
+                        <!-- Buttons -->
+                        <div>
+                            <Link :href="route('dashboard')"
+                                class="bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400">
+                            Cancel
+                            </Link>
+
+                            <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }"
+                                :disabled="form.processing">
+                                Save
+                            </PrimaryButton>
                         </div>
                     </div>
                 </div>
