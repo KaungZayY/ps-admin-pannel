@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('item_name');
             $table->string('category');
             $table->double('price');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->string('item_condition');
             $table->string('item_type');
             $table->integer('status')->nullable();

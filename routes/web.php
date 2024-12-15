@@ -36,3 +36,4 @@ Route::middleware([
 });
 
 Route::get('/items/create',[ItemController::class,'create'])->name('items.create');
+Route::post('/items/create',[ItemController::class,'store']);

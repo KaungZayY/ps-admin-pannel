@@ -52,13 +52,17 @@ const countries = countryCodesJson.map((country) => ({
     value: country.dial_code,
     label: country.code,
 }));
+
+const submit = () => {
+    form.post(route('items.create'));
+};
 </script>
 
 <template>
     <AppLayout title="Create Item">
         <div class="w-full h-auto mt-8">
             <p class="bg-gray-400 px-2 rounded-md py-2 text-lg font-bold">Add Items</p>
-            <form>
+            <form @submit.prevent="submit">
                 <div class="flex flex-row justify-between mt-4 gap-4">
                     <div class="w-1/2 flex flex-col px-2">
                         <p class="font-bold mb-4">Item Information</p>
@@ -76,7 +80,7 @@ const countries = countryCodesJson.map((country) => ({
                             <InputLabel for="category" value="Select Category" :isRequired="true" />
                             <SelectBox id="category" :options="categories" v-model="form.category"
                                 class="mt-2 block w-full" />
-                            <InputError class="mt-2" :message="form.errors.item_name" />
+                            <InputError class="mt-2" :message="form.errors.category" />
                         </div>
 
                         <!-- Price-->
@@ -113,7 +117,7 @@ const countries = countryCodesJson.map((country) => ({
                         <!-- Publish Status -->
                         <div class="mb-5">
                             <InputLabel for="status" value="Status" />
-                            <Checkbox id="status" v-model="form.status" :true-value="1"
+                            <Checkbox id="status" v-model="form.status" :true-value=1
                                 class="mt-2 inline-block w-5 h-5" /><span
                                 class="text-gray-600 text-xs ml-3">Publish</span>
                             <InputError class="mt-2" :message="form.errors.status" />
@@ -122,8 +126,7 @@ const countries = countryCodesJson.map((country) => ({
                         <!-- Item Photo -->
                         <div class="mb-5">
                             <InputLabel for="item_photo" value="Item Photo" :isRequired="true" />
-                            <TextInput id="item_photo" v-model="form.item_photo" type="file"
-                                class="mt-2 block w-full" />
+                            <input type="file" @input="form.item_photo = $event.target.files[0]" />
                             <InputError class="mt-2" :message="form.errors.item_photo" />
                         </div>
                     </div>
@@ -157,7 +160,7 @@ const countries = countryCodesJson.map((country) => ({
                         </div>
 
                         <!-- Buttons -->
-                        <div>
+                        <div class="flex flex-row justify-end">
                             <Link :href="route('dashboard')"
                                 class="bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400">
                             Cancel

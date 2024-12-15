@@ -30,7 +30,6 @@ const logout = () => {
 
         <Head :title="title" />
 
-        <Banner />
         <div class="flex bg-gray-50 min-h-screen">
             <!-- Sidebar -->
             <div :class="state.isSidebarOpen ? 'w-64' : 'w-20'"
@@ -87,6 +86,7 @@ const logout = () => {
             <!-- Main Content -->
             <div :class="state.isSidebarOpen ? 'ml-64' : 'ml-20'"
                 class="flex-1 p-8 bg-gray-100 transition-all duration-300 ease-in-out">
+                <Banner class="mb-2"/>
                 <div class="border-b border-gray-500">
                     <button @click="toggleSidebar" class="text-black">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
